@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script>
+        window.onload = function () {
+            const cursor = document.querySelector(".cursor");
+            const follower = document.querySelector(".cursor_follower");
+
+            function Trailer(e) {
+                // console.log(e);
+                // document.querySelector(".pageX").innerText = e.pageX;
+                // document.querySelector(".pageY").innerText = e.pageY;  // 도큐먼트에 좌표 표시하는 거 막아둠
+
+                gsap.to(cursor, { duration: 0.3, left: e.pageX - 5, top: e.pageY - 5 });
+                gsap.to(follower, { duration: 0.8, left: e.pageX - 15, top: e.pageY - 15 });
+
+                document.querySelectorAll("h1, nav").forEach(e => {   //body 부분 수정하면 됨~!~!~!~!!~ h1, nav 를 바디로 고치던가
+                    // console.log(e);
+                    e.addEventListener("mouseover", () => {
+                        cursor.classList.add("show");
+                        follower.classList.add("show");
+                    });
+                    e.addEventListener("mouseout", () => {
+                        cursor.classList.remove("show");
+                        follower.classList.remove("show");
+                    });
+                });
+
+            }
+            document.addEventListener("mousemove", Trailer);
+        }
+    </script>
+</head>
+
+<style>
+    html {
+        cursor: none;
+    }
+
+    body {
+        background-image: url(pic/gg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+    }
+
+    h1 {
+        width: fit-content;
+        position: relative;
+        z-index: 9998;
+    }
+
+    .cursor {
+        width : 30px;
+        height: 30px;
+        border: 1px solid rgb(87, 87, 87);
+        border-radius: 50%;
+        /* background-color: yellow; */
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        transform: translate(-50%, -50%);
+        transform-origin: 100% 100%;
+        transition: all 0.3s ease;
+        transition-property: background, transform;
+        backdrop-filter: blur(3px);
+    }
+    .link_hover {
+        transform: scale(2);
+        background-color: rgb(0, 0, 0, 0.5);
+    }
+
+    .cursor_follower {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        user-select: none;
+        pointer-events: none;
+        transition: transform 0.6s ease-in-out, opacity 0.2s ease-in-out;
+    }
+
+    .cursor.show {
+        opacity: .5;
+        transform: scale(0);
+        background: rgba(255, 51, 0, 1);
+    }
+    .cursor.show {
+        opacity: .5;
+        transform: scale(0);
+        background: rgb(255, 255, 255);
+    }
+    .cursor_follower.show {
+            transform: scale(2);
+            background: rgba(255, 51, 0, 0.6);
+        }
+     nav {
+        /* border: 3px solid red; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .gnbMenu {
+        display: flex;
+    }
+    .gnbMenu li {
+         margin: 0 30px;
+         list-style: none;
+         z-index: 9998;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    img {
+        z-index: 9999;
+        width: 300px;
+        border-radius: 50%;
+        margin-left: 20px;
+        box-shadow: rgb(255, 255, 255) 1px 0 10px;
+    }
+    .zz {
+        margin-left: 30px;
+    }
+    p, h2, h1, li {
+        text-shadow: rgb(255, 255, 255) 1px 0 10px;
+    }
+</style>
+
+<body>
+    <!-- <h1>Mouse Trailer</h1> -->
+    <div class="cursor"></div>
+    <div class="cursor_follower"></div>
+            
+    <header>
+        <nav>
+        <h1><a href="#">Kiki's Delivery Service</a></h1>
+            <ul class="gnbMenu">
+                <li><a href="#">work</a></li>
+                <li><a href="#">profile</a></li>
+                <li><a href="#">contact</a></li>
+                <li><a href="#">story</a></li>
+            </ul>
+        </nav>
+        <div class="zz">
+        <img src="pic/CMZu4G1v3AGNy6BAj8kD7MLQjIA.jpeg.crdownload" alt="프로필 이미지">
+        <br><br><br><br>
+        <h2>ChoHaeMi</h2>
+        <p>
+            <a href="whgoal@kaywon.ac.kr">whgoal@kaywon.ac.kr</a> <br>
+            Kaywon Univ. Disital Media Design
+        </p>
+    </div>
+        <div class="info left">
+            <span class="pageX"></span>
+            <span class="pageY"></span>
+            </div>
+    </header>
+</body>
+<!-- https://wtss.tistory.com/358# -->
+<!-- https://webstoryboy.github.io/ScriptEffect/webstoryboy/mouseEffect/mouseEffect01-javascript.html -->
+
+</html>
